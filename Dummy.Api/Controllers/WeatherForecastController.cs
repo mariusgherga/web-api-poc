@@ -6,7 +6,7 @@ namespace Dummy.Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private static string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
@@ -29,5 +29,36 @@ namespace Dummy.Api.Controllers
             })
             .ToArray();
         }
+
+        [HttpPost("encrypt")]
+        public IActionResult EncryptString([FromBody] EncryptRequest request)
+        {
+            if (string.IsNullOrEmpty(request.PlainText) || string.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest("Plain text and password are required.");
+            }
+
+            string encryptedString = EncryptionHelper.EncryptString(request.PlainText, request.Password);
+            return Ok(new { EncryptedText = encryptedString });
+        }
+
+        [HttpPost("decrypt")]
+        public IActionResult DecryptString([FromBody] EncryptRequest request)
+        {
+            if (string.IsNullOrEmpty(request.EncryptedText) || string.IsNullOrEmpty(request.Password))
+            {
+                return BadRequest("Encrypted text and password are required.");
+            }
+
+            string decryptedString = EncryptionHelper.DecryptString(request.EncryptedText, request.Password);
+            return Ok(new { DecryptedText = decryptedString });
+        }
+    }
+
+    public class EncryptRequest
+    {
+        public string PlainText { get; set; }
+        public string EncryptedText { get; set; }
+        public string Password { get; set; }
     }
 }
