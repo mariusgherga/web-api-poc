@@ -4,3 +4,5 @@
 
 /Dummy.Api/bin/Debug/net8.0
 /Dummy.Api/obj
+/.vs
+/Dummy.Api/.vs/Dummy.Api
