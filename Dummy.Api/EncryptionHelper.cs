@@ -35,7 +35,7 @@
         {
             using (Aes aes = Aes.Create())
             {
-                using (SHA256 sha256 = SHA256.Create())
+                using (SHA1 sha256 = SHA1.Create())
                 {
                     aes.Key = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
                 }
