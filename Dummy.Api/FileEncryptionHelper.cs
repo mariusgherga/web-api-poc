@@ -1,6 +1,5 @@
 ﻿namespace Dummy.Api
 {
-    using System;
     using System.IO;
     using System.Security.Cryptography;
     using System.Text;
@@ -17,7 +16,7 @@
                 }
                 aes.IV = new byte[16]; // Initialization Vector (IV)
 
-                using (MemoryStream ms = new MemoryStream())
+                using (MemoryStream ms = new())
                 {
                     using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
                     {

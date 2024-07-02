@@ -57,8 +57,8 @@ namespace Dummy.Api.Controllers
 
     public class EncryptRequest
     {
-        public string PlainText { get; set; }
-        public string EncryptedText { get; set; }
-        public string Password { get; set; }
+        public string PlainText { get; set; } = string.Empty;
+        public string EncryptedText { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }
